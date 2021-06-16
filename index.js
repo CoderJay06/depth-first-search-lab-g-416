@@ -8,25 +8,38 @@
     // for all vertices from vertex to adjacent vertex in adjacentEdges(vertex)
       // stack.push(adjacentVertex)
       
-      
+// recursive solution:
 function depthFirstSearch(rootNode, vertices, edges) {
-  stack.push(rootNode);
-  let explored = [rootNode];
-
-  while (stack.length > 0) {
-    let vertex = stack.pop();
-    if (!vertex.discovered) {
-      vertex.discovered = true;
-      for (const edge of findAdjacent(vertex.name, vertices, edges)) {
-        stack.push(edge);
-        explored.push(edge);
-      }
+  let vertex = rootNode;
+  vertex.discovered = true;
+  for (const edge of findAdjacent(vertex.name, vertices, edges)) {
+    if (!edge.discovered) {
+      console.log(ed)
+      return depthFirstSearch(edge, vertices, edges);
     }
   }
-  return explored;
 }
+      
+// iterative solution:
+// function depthFirstSearch(rootNode, vertices, edges) {
+//   stack.push(rootNode);
+//   let explored = [rootNode];
+
+//   while (stack.length > 0) {
+//     let vertex = stack.pop();
+//     if (!vertex.discovered) {
+//       vertex.discovered = true;
+//       for (const edge of findAdjacent(vertex.name, vertices, edges)) {
+//         stack.push(edge);
+//         explored.push(edge);
+//       }
+//     }
+//   }
+//   return explored;
+// }
 
 function findAdjacent(nodeName,  vertices, edges){
+  console.log(edges)
   return edges.filter(function(edge){
     return edge.includes(nodeName)
   }).map(function(edge){
